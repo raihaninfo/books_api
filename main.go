@@ -4,15 +4,20 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/mattn/go-sqlite3"
 
-	db "github.com/raihaninfo/books_api/initialize"
+	"github.com/raihaninfo/books_api/initialize"
 	"github.com/raihaninfo/books_api/model"
+	"github.com/raihaninfo/books_api/router"
 )
 
-func main() {
-	db := db.DbConnection()
+func init() {
+	initialize.Env()
+	db := initialize.DbConnection()
 	db.AutoMigrate(&model.Books{})
+}
+func main() {
+
 	r := gin.Default()
+	router.Router(r)
 
-
-	r.Run(":8080")
+	r.Run()
 }

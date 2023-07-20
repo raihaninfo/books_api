@@ -1,9 +1,10 @@
-package db
+package initialize
 
 import (
 	"log"
 
 	_ "github.com/mattn/go-sqlite3"
+
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -14,6 +15,12 @@ func DbConnection() (db *gorm.DB) {
 		panic("failed to connect database")
 	}
 
+	// migrate(db)
+
 	log.Println("db connection successful")
 	return db
 }
+
+// func migrate(db *gorm.DB) {
+// 	db.AutoMigrate(&model.Books{})
+// }
