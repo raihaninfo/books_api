@@ -15,7 +15,6 @@ func init() {
 	db.AutoMigrate(&model.Books{})
 }
 func main() {
-
 	r := gin.Default()
 	router.Router(r)
 

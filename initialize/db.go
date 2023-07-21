@@ -15,12 +15,6 @@ func DbConnection() (db *gorm.DB) {
 		panic("failed to connect database")
 	}
 
-	// migrate(db)
-
 	log.Println("db connection successful")
 	return db
 }
-
-// func migrate(db *gorm.DB) {
-// 	db.AutoMigrate(&model.Books{})
-// }

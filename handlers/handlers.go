@@ -21,14 +21,12 @@ func PostBook(c *gin.Context) {
 	}
 	Db.Create(&model.Books{Id: id, Name: book.Name, Author: book.Author, Publisher: book.Publisher, Price: book.Price})
 	c.JSON(200, &book)
-	// model.InsertSingleBook(book.Name, book.Author, book.Publisher, book.Price)
 }
 
 func AllBooks(c *gin.Context) {
 	var books []model.Books
 	Db.Find(&books)
 	c.IndentedJSON(200, &books)
-
 }
 
 func OneBook(c *gin.Context) {
@@ -57,6 +55,7 @@ func UpdateBook(c *gin.Context) {
 	c.IndentedJSON(200, &book)
 
 }
+
 func DeleteBook(c *gin.Context) {
 	var book model.Books
 	id := c.Param("id")
