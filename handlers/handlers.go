@@ -64,6 +64,8 @@ func DeleteBook(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Book not found"})
 		return
 	}
-	c.IndentedJSON(200, &book)
+	c.IndentedJSON(200, gin.H{
+		"message": "delete book " + id,
+	})
 
 }
