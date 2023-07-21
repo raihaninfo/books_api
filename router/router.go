@@ -7,8 +7,9 @@ import (
 
 func Router(r *gin.Engine) {
 	r.POST("/book", handlers.PostBook)
-	r.GET("/books", handlers.GetAllBooks)
-	r.GET("/book/{:id}", handlers.GetOneBook)
-	r.PUT("/book/{:id}", handlers.GetOneBook)
-	r.DELETE("/book/{:id}", handlers.DeleteBook)
+	r.GET("/books", handlers.AllBooks)
+	r.GET("/book/:id", handlers.OneBook)
+	r.PUT("/book/:id", handlers.UpdateBook)
+	r.DELETE("/book/:id", handlers.DeleteBook)
 }
+
