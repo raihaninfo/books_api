@@ -12,7 +12,7 @@ import (
 func init() {
 	initialize.Env()
 	db := initialize.DbConnection()
-	db.AutoMigrate(&model.Books{})
+	db.AutoMigrate(&model.Books{}, &model.User{})
 }
 func main() {
 	r := gin.Default()

@@ -8,8 +8,8 @@ import (
 func Router(r *gin.Engine) {
 
 	public := r.Group("/api")
-	public.GET("/register", handlers.Register)
-	public.POST("/login", handlers.Login)
+	public.POST("/register", handlers.Register)
+	public.GET("/login", handlers.Login)
 	public.GET("/logout", handlers.Logout)
 
 	api := r.Group("/api/")

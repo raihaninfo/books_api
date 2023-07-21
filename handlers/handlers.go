@@ -7,6 +7,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/raihaninfo/books_api/initialize"
 	"github.com/raihaninfo/books_api/model"
+	"github.com/raihaninfo/books_api/utils"
 	"gorm.io/gorm"
 )
 
@@ -21,6 +22,22 @@ func Logout(c *gin.Context) {
 }
 
 func Register(c *gin.Context) {
+	var user model.User
+	id := uuid.New()
+	err := c.BindJSON(&user)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	user.Id = id
+	hash, err := utils.HashPassword(user.Password)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	Db.Create(&model.User{Id: id, Name: user.Name, Email: user.Email, Username: user.Username, Password: hash})
+	c.JSON(http.StatusCreated, &user)
 
 }
 
@@ -31,8 +48,9 @@ func PostBook(c *gin.Context) {
 	if err != nil {
 		c.AbortWithError(http.StatusBadRequest, err)
 	}
+	book.Id = id
 	Db.Create(&model.Books{Id: id, Name: book.Name, Author: book.Author, Publisher: book.Publisher, Price: book.Price})
-	c.JSON(200, &book)
+	c.JSON(201, &book)
 }
 
 func AllBooks(c *gin.Context) {
