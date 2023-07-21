@@ -6,10 +6,16 @@ import (
 )
 
 func Router(r *gin.Engine) {
-	r.POST("/book", handlers.PostBook)
-	r.GET("/books", handlers.AllBooks)
-	r.GET("/book/:id", handlers.OneBook)
-	r.PUT("/book/:id", handlers.UpdateBook)
-	r.DELETE("/book/:id", handlers.DeleteBook)
-}
 
+	public := r.Group("/api")
+	public.GET("/register", handlers.Register)
+	public.POST("/login", handlers.Login)
+	public.GET("/logout", handlers.Logout)
+
+	api := r.Group("/api/")
+	api.POST("/book", handlers.PostBook)
+	api.GET("/books", handlers.AllBooks)
+	api.GET("/book/:id", handlers.OneBook)
+	api.PUT("/book/:id", handlers.UpdateBook)
+	api.DELETE("/book/:id", handlers.DeleteBook)
+}

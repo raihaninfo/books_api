@@ -12,6 +12,18 @@ import (
 
 var Db *gorm.DB = initialize.DbConnection()
 
+func Login(c *gin.Context) {
+
+}
+
+func Logout(c *gin.Context) {
+
+}
+
+func Register(c *gin.Context) {
+
+}
+
 func PostBook(c *gin.Context) {
 	var book model.Books
 	id := uuid.New()
