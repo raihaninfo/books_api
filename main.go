@@ -16,6 +16,7 @@ func init() {
 }
 func main() {
 	r := gin.Default()
+
 	router.Router(r)
 
 	r.Run()

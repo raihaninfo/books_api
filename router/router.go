@@ -9,7 +9,7 @@ func Router(r *gin.Engine) {
 
 	public := r.Group("/api")
 	public.POST("/register", handlers.Register)
-	public.GET("/login", handlers.Login)
+	public.POST("/login", handlers.Login)
 	public.GET("/logout", handlers.Logout)
 
 	api := r.Group("/api/")

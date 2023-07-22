@@ -14,6 +14,26 @@ import (
 var Db *gorm.DB = initialize.DbConnection()
 
 func Login(c *gin.Context) {
+	var user model.User
+	var body struct {
+		Email    string `json:"email"`
+		Password string `json:"password"`
+	}
+	if err := c.BindJSON(&body); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	Db.Where("email =?", body.Email).First(&user)
+	if user.Id == uuid.Nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
+		return
+	} else {
+		if utils.CheckPasswordHash(body.Password, user.Password) {
+			c.JSON(http.StatusOK, gin.H{"token": utils.CreateToken(user.Id.String())})
+		} else {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
+		}
+	}
 
 }
 
