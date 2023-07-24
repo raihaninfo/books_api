@@ -40,10 +40,6 @@ func Login(c *gin.Context) {
 
 }
 
-func Logout(c *gin.Context) {
-
-}
-
 func Register(c *gin.Context) {
 	var user model.User
 	id := uuid.New()
