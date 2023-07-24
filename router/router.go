@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/raihaninfo/books_api/handlers"
+	"github.com/raihaninfo/books_api/middleware"
 )
 
 func Router(r *gin.Engine) {
@@ -13,6 +14,7 @@ func Router(r *gin.Engine) {
 	public.GET("/logout", handlers.Logout)
 
 	api := r.Group("/api/")
+	api.Use(middleware.RequirerAuth)
 	api.POST("/book", handlers.PostBook)
 	api.GET("/books", handlers.AllBooks)
 	api.GET("/book/:id", handlers.OneBook)

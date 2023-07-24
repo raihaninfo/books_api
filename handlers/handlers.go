@@ -29,7 +29,10 @@ func Login(c *gin.Context) {
 		return
 	} else {
 		if utils.CheckPasswordHash(body.Password, user.Password) {
-			c.JSON(http.StatusOK, gin.H{"token": utils.CreateToken(user.Id.String())})
+			tokenString := utils.CreateToken(user.Id.String())
+			c.SetSameSite(http.SameSiteLaxMode)
+			c.SetCookie("Authorization", tokenString, 3600*24*2, "", "", false, true)
+			c.JSON(http.StatusOK, gin.H{"token": tokenString})
 		} else {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
 		}

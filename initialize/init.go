@@ -2,6 +2,6 @@ package initialize
 
 import "github.com/joho/godotenv"
 
-func Env(){
+func Env() {
 	godotenv.Load()
 }
