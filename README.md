@@ -17,8 +17,8 @@ require (
 ## Public api routes
 
 ```bash
-[Register new user] POST   /api/register
-[Login with Jwt token] POST   /api/login
+[Register new user]        POST     /api/register
+[Login with Jwt token]     POST     /api/login
 
 ```
 
